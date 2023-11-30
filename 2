@@ -1,0 +1,9 @@
+import pandas as pd
+import statsmodels.api as sm
+df = pd.read_csv('c:\\Users\\Galym Ayana\\Desktop\\python\\Bank_Personal_Loan_Modelling.csv')
+X = df.iloc[:, :-1]
+y = df.iloc[:, -1]
+X = sm.add_constant(X)
+
+model = sm.OLS(y, X).fit()
+print(model.summary())
