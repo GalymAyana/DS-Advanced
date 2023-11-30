@@ -1,0 +1,18 @@
+import pandas as pd
+import statsmodels.api as sm
+df = pd.read_csv('c:\\Users\\Galym Ayana\\Desktop\\python\\Bank_Personal_Loan_Modelling.csv')
+X = df.iloc[:, :-1]
+y = df.iloc[:, -1]
+X = sm.add_constant(X)
+
+model = sm.OLS(y, X).fit()
+
+print("+-----------------------+")
+print("|   Coefficients        |")
+print("+-----------------------+")
+print("| Variable | Coef | SE  | t-value | p-value |")
+print("|----------|------|-----|---------|---------|")
+for var, coef, se, tval, pval in zip(X.columns, model.params, model.bse, model.tvalues, model.pvalues):
+    print(f"| {var:8} | {coef:4.2f} | {se:4.2f} | {tval:6.2f} | {pval:6.4f} |")
+print("+-----------------------+")
+print(model.summary())
